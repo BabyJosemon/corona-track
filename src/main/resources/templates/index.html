@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Corona Virus Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+        .table-responsive {
+        width: 80% !important;
+        margin-left:auto;
+        margin-right:auto;
+        }
+        .hero-bg {
+        background: url('/images/y-so-serious.png');
+        }
+        body {
+        color: #FFFFFF
+        }
+        .totalCases h1,p{
+        font-family: 'Montserrat', sans-serif;
+        }
+        .footerEnd p{
+        color:black
+        }
+    </style>
+</head>
+
+<body>
+<div class = "hero-bg">
+    <nav class="navbar navbar-dark bg-secondary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="/images/syringe.png" alt="" width="30" height="24" class="d-inline-block align-top">
+                Corona Virus Tracker
+            </a>
+        </div>
+    </nav>
+
+    <div class="totalCases pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+        <h1 class="display-4" th:text="${totalReportedCases}"></h1>
+        <p class="lead">Total Cases Reported as of Today</p>
+    </div>
+
+<div class="table-responsive">
+    <table class="table table-dark table-hover table-striped">
+        <thead>
+        <tr>
+            <th style="width: 25%">State</th>
+            <th style="width: 25%">Country</th>
+            <th style="width: 25%">Total Cases Reported</th>
+            <th style="width: 25%">Changes since last day</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+<footer class="footerEnd text-muted py-5">
+    <div class="container">
+        <p class="float-end mb-1">
+            <a href="#">Back to top</a>
+        </p>
+        <p class="mb-0">Data source used: <a href="https://github.com/CSSEGISandData/COVID-19">Novel Coronavirus (COVID-19) Cases</a>, provided by JHU CSSE.</p>
+    </div>
+</footer>
+</body>
+
+</html>
